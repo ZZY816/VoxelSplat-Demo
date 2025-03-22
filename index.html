@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoxelSplat: Dynamic Gaussian Splatting as an Effective Loss for Occupancy and Flow Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .affiliations {
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            gap: 20px; /* 控制单位之间的间距 */
+            flex-wrap: wrap; /* 小屏幕自动换行 */
+        }
+        .affiliations p {
+            margin: 5px 0;
+        }
+        .conference {
+            font-size: 24px; /* 字体更大 */
+            color: #000; /* 黑色字体 */
+            font-weight: bold; /* 粗体 */
+            margin: 10px 0 20px; /* 上下间距 */
+            font-style: normal; /* 取消斜体 */
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 28px;
+        }
+        .authors, .affiliations, .contact, .links {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        .authors sup, .affiliations sup {
+            font-size: 14px;
+        }
+        .abstract {
+            max-width: 900px; /* 限制宽度为 600px，与图片风格接近 */
+            text-align: justify; /* 两端对齐 */
+            margin: 0 auto 20px; /* 居中并添加底部间距 */
+        }
+        .video-container {
+            max-width: 900px; /* 限制最大宽度 */
+            margin: auto; /* 居中对齐 */
+        }
+        .video-container iframe {
+            width: 100%; /* 让 iframe 适应容器 */
+            height: auto;
+            aspect-ratio: 16 / 9; /* 保持16:9比例 */
+        }
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>VoxelSplat: Dynamic Gaussian Splatting as an Effective Loss for Occupancy and Flow Prediction</h1>
+        <p class="conference">CVPR 2025</p>
+        <div class="authors">
+            <p>
+                <strong>Ziyue Zhu<sup>1</sup></strong>, 
+                <strong>Shenlong Wang<sup>2</sup></strong>, 
+                <strong>Jin Xie<sup>1</sup></strong>, 
+                <strong>Jiangjiang Liu<sup>3</sup></strong>, 
+                <strong>Jingdong Wang<sup>3</sup></strong>, 
+                <strong>Yang Jian<sup>1✉</sup></strong>
+            </p>
+        </div>
+
+        <div class="affiliations">
+            <p><sup>1</sup> Nankai University</p>
+            <p><sup>2</sup> University of Illinois Urbana-Champaign</p>
+            <p><sup>3</sup> Baidu VIS</p>
+        </div>
+
+        <div class="contact">
+            <p>zhuziyue@mail.nankai.edu.cn</p>
+        </div>
+
+        <div class="links">
+            <a href="https://arxiv.org/abs/your-paper-id" class="button" target="_blank">📄 arXiv</a>
+            <a href="https://github.com/your-username/VoxelSplat" class="button" target="_blank">💻 Code</a>
+        </div>
+
+        <h2>Abstract</h2>
+        <p class="abstract">
+            Recent advancements in camera-based occupancy prediction have focused on the simultaneous prediction of 3D semantics and scene flow, a task that presents significant challenges due to specific difficulties, e.g., occlusions and unbalanced dynamic environments. In this paper, we analyze these challenges and their underlying causes.
+            To address them, we propose a novel regularization framework called <strong>VoxelSplat</strong>. This framework leverages recent developments in 3D Gaussian Splatting to enhance model performance in two key ways:
+            <br>
+            (<i>i</i>) <strong>Enhanced Semantics Supervision through 2D Projection</strong>: During training, our method decodes sparse semantic 3D Gaussians from 3D representations and projects them onto the 2D camera view. This provides additional supervision signals in the camera-visible space, allowing 2D labels to improve the learning of 3D semantics.
+            <br>
+            (<i>ii</i>) <strong>Scene Flow Learning</strong>: Our framework uses the predicted scene flow to model the motion of Gaussians, and is thus able to learn the scene flow of moving objects in a self-supervised manner using the labels of adjacent frames.
+            <br>
+            Our method can be seamlessly integrated into various existing occupancy models, enhancing performance without increasing inference time. Extensive experiments on benchmark datasets demonstrate the effectiveness of <strong>VoxelSplat</strong> in improving the accuracy of both semantic occupancy and scene flow estimation.
+        </p>
+
+        <h2>Method Overview</h2>
+        <div class="image-container">
+            <img src="images/method_overview.png" alt="Method Overview">
+            <p>Figure 1</p>
+        </div>
+
+        <h2>Video Demo</h2>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p>Video 1</p>
+
+
+        <h2>Experimental Results</h2>
+        <div class="image-container">
+            <img src="images/results_comparison.png" alt="Results Comparison">
+            <p>Figure 2</p>
+        </div>
+    </div>
+</body>
+</html>
