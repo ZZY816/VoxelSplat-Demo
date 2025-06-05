@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoxelSplat: Dynamic Gaussian Splatting as an Effective Loss for Occupancy and Flow Prediction</title>
     <style>
+        /* ========== Hero 区块样式 ========== */
+        .hero {
+            background: linear-gradient(
+                to right,
+                rgba(175, 238, 238, 0.6),
+                rgba(251, 207, 251, 0.6)
+            );
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #333;
+            margin: 0 0 12px 0;
+            line-height: 1.3;
+        }
+        .hero-title-highlight {
+            color: #007bff;
+        }
+        .hero-authors {
+            font-size: 1rem;
+            color: #024fa1;
+            margin-bottom: 12px;
+        }
+        .hero-affiliations {
+            display: block;
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 4px;
+        }
+        .hero-buttons {
+            display: inline-flex;
+            gap: 10px;
+        }
+        .hero-buttons .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background-color 0.2s ease;
+        }
+        .hero-buttons .btn-arxiv {
+            background-color: #fcb636;
+        }
+        .hero-buttons .btn-arxiv:hover {
+            background-color: #e0a22f;
+        }
+        .hero-buttons .btn-code {
+            background-color: #28a745;
+        }
+        .hero-buttons .btn-code:hover {
+            background-color: #218838;
+        }
+        .hero-buttons .btn-citation {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        }
+        .hero-buttons .btn-citation:hover {
+            opacity: 0.9;
+        }
+
+        /* ========== 全局正文样式 ========== */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -12,26 +78,27 @@
             padding: 0;
             text-align: center;
         }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: left;
+        }
         .affiliations {
             display: flex;
-            justify-content: center; /* 水平居中 */
-            gap: 20px; /* 控制单位之间的间距 */
-            flex-wrap: wrap; /* 小屏幕自动换行 */
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
         .affiliations p {
             margin: 5px 0;
         }
         .conference {
-            font-size: 24px; /* 字体更大 */
-            color: #000; /* 黑色字体 */
-            font-weight: bold; /* 粗体 */
-            margin: 10px 0 20px; /* 上下间距 */
-            font-style: normal; /* 取消斜体 */
-        }
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
+            font-size: 24px;
+            color: #000;
+            font-weight: bold;
+            margin: 10px 0 20px;
+            font-style: normal;
         }
         h1 {
             font-size: 28px;
@@ -39,31 +106,161 @@
         .authors, .affiliations, .contact, .links {
             margin-bottom: 20px;
             font-size: 18px;
+            text-align: center;
         }
         .authors sup, .affiliations sup {
             font-size: 14px;
         }
         .abstract {
-            max-width: 900px; /* 限制宽度为 600px，与图片风格接近 */
-            text-align: justify; /* 两端对齐 */
-            margin: 0 auto 20px; /* 居中并添加底部间距 */
+            max-width: 900px;
+            text-align: justify;
+            margin: 0 auto 20px;
         }
         .video-container {
-            max-width: 900px; /* 限制最大宽度 */
-            margin: auto; /* 居中对齐 */
-        }
-        .video-container iframe {
-            width: 100%; /* 让 iframe 适应容器 */
-            height: auto;
-            aspect-ratio: 16 / 9; /* 保持16:9比例 */
-        }
-        .image-container {
+            position: relative;
+            max-width: 900px;
+            margin: auto;
             text-align: center;
-            margin: 20px 0;
+        }
+        .video-container video {
+            width: 100%;
+            display: block;
+            border-radius: 6px;
+        }
+        .video-caption {
+            position: absolute;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 5px 10px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .top-left {
+            top: -35px;
+            left: 177px;
+            transform: translate(0, 0);
+        }
+        .top-right {
+            top: -35px;
+            right: 100px;
+            transform: translate(0, 0);
+        }
+        .bottom-left {
+            bottom: 32px;
+            left: 147px;
+            transform: translate(0, 0);
+        }
+        .bottom-right {
+            bottom: 32px;
+            right: 147px;
+            transform: translate(0, 0);
         }
         .image-container img {
-            max-width: 100%;
+            image-rendering: auto;
+            max-width: 900px;
+            width: 100%;
             height: auto;
+            margin: auto;
+            display: block;
+        }
+        .image-caption {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 15px;
+            line-height: 1.6;
+            text-align: justify;
+            color: #333;
+            padding: 10px 20px;
+        }
+        .grid-image-container {
+            position: relative;
+            text-align: center;
+            max-width: 900px;
+            margin: auto;
+        }
+        .grid-image-container img {
+            width: 100%;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .image-labels {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+            font-weight: 500;
+            font-size: 14px;
+            color: #222;
+        }
+        .image-labels span {
+            flex: 1;
+            text-align: center;
+        }
+        .flow-comparison-container {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            grid-template-rows: auto auto;
+            max-width: 900px;
+            margin: 0 auto;
+            gap: 0;
+        }
+        .row-label {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 15px;
+            color: #333;
+            text-align: center;
+            align-self: center;
+            justify-self: center;
+        }
+        .empty-cell {
+        }
+        .flow-image {
+            grid-column: 2 / span 1;
+            grid-row: 1 / span 2;
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 6px;
+        }
+        .image-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .image-row img {
+            max-width: 420px;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .bibtex-section {
+            max-width: 900px;
+            margin: 40px auto;
+            font-family: Arial, sans-serif;
+        }
+        .bibtex-section h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: left;
+            color: #333;
+        }
+        .bibtex-container {
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 12px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre;
+            text-align: left;
+            color: #222;
         }
         .button {
             display: inline-block;
@@ -81,65 +278,164 @@
     </style>
 </head>
 <body>
+
+    <!-- ====== Hero 区块 ========== -->
+    <header class="hero">
+        <h1>
+            <span class="hero-title-highlight">VoxelSplat:</span>
+            Dynamic Gaussian Splatting as an Effective Loss for Occupancy and Flow Prediction
+        </h1>
+        <div class="hero-authors">
+            Ziyue Zhu<sup>1</sup> · Shenlong Wang<sup>2</sup> · Jin Xie<sup>1✉</sup> · Jiangjiang Liu<sup>3</sup> · Jingdong Wang<sup>3</sup> · Yang Jian<sup>1✉</sup>
+            <br>
+            <span class="hero-affiliations">
+                <sup>1</sup> Nankai University   ·   <sup>2</sup> University of Illinois Urbana-Champaign   ·   <sup>3</sup> Baidu VIS
+            </span>
+        </div>
+        <div class="hero-buttons">
+            <a href="https://arxiv.org/abs/your-paper-id" class="btn btn-arxiv" target="_blank">
+                📄 arXiv
+            </a>
+            <a href="https://github.com/ZZY816/VoxelSplat" class="btn btn-code" target="_blank">
+                💻 Code
+            </a>
+            <a href="#bibtex" class="btn btn-citation" target="_blank">
+                📑 BibTeX
+            </a>
+        </div>
+    </header>
+
+    <!-- ====== 正文 Container 区块 ========== -->
     <div class="container">
-        <h1>VoxelSplat: Dynamic Gaussian Splatting as an Effective Loss for Occupancy and Flow Prediction</h1>
-        <p class="conference">CVPR 2025</p>
-        <div class="authors">
-            <p>
-                <strong>Ziyue Zhu<sup>1</sup></strong>, 
-                <strong>Shenlong Wang<sup>2</sup></strong>, 
-                <strong>Jin Xie<sup>1✉</sup></strong>, 
-                <strong>Jiangjiang Liu<sup>3</sup></strong>, 
-                <strong>Jingdong Wang<sup>3</sup></strong>, 
-                <strong>Yang Jian<sup>1✉</sup></strong>
+        <h2 style="text-align: center;">Abstract</h2>
+        <p class="abstract">
+            Recent advances in camera-based occupancy prediction aim to jointly estimate 3D semantics and scene flow. We propose <strong>VoxelSplat</strong>, a novel regularization framework that leverages 3D Gaussian Splatting to improve learning in two key ways:
+            <br>
+            (<i>i</i>) <strong>2D-Projected Semantic Supervision</strong>: During training, sparse semantic Gaussians decoded from 3D features are projected onto the 2D camera view, enabling camera-visible supervision to guide 3D semantic learning.
+            <br>
+            (<i>ii</i>) <strong>Enhanced Scene Flow Learning</strong>: Motion is modeled by propagating Gaussians with predicted scene flow, allowing enhanced flow learning from adjacent-frame labels.
+            <br>
+            <strong>VoxelSplat</strong> integrates easily into existing occupancy models, improving both semantic and motion predictions without increasing inference time.
+        </p>
+
+        <div style="height: 20px;"></div>
+
+        <h2 style="text-align: center;">Video Demo</h2>
+        <div style="height: 20px;"></div>
+        <div class="video-container">
+            <div class="video-caption top-left">Input Images</div>
+            <div class="video-caption top-right">Predicted Occupancy (surround-view)</div>
+            <video autoplay muted loop controls>
+                <source src="assets/scene-0094.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div style="height: 20px;"></div>
+
+        <div class="video-container" style="margin-top: 20px;">
+            <video autoplay muted loop controls>
+                <source src="assets/scene-0098.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-caption bottom-left">Predicted Occupancy</div>
+            <div class="video-caption bottom-right">Predicted Scene Flow</div>
+            <p style="margin-top: 42px;">
+                Predict 3D semantics (occupancy) and object motion (flow) from temporal surround-view images.
             </p>
         </div>
 
-        <div class="affiliations">
-            <p><sup>1</sup> Nankai University</p>
-            <p><sup>2</sup> University of Illinois Urbana-Champaign</p>
-            <p><sup>3</sup> Baidu VIS</p>
-        </div>
+        <div style="height: 30px;"></div>
 
-        <div class="contact">
-            <p>zhuziyue@mail.nankai.edu.cn</p>
+        <h2 style="text-align: center;">Method Overview</h2>
+        <div class="image-container">
+            <img src="assets/framework.png" alt="Method Overview">
         </div>
-
-        <div class="links">
-            <a href="https://arxiv.org/abs/your-paper-id" class="button" target="_blank">📄 arXiv</a>
-            <a href="https://github.com/your-username/VoxelSplat" class="button" target="_blank">💻 Code</a>
-        </div>
-
-        <h2>Abstract</h2>
-        <p class="abstract">
-            Recent advancements in camera-based occupancy prediction have focused on the simultaneous prediction of 3D semantics and scene flow, a task that presents significant challenges due to specific difficulties, e.g., occlusions and unbalanced dynamic environments. In this paper, we analyze these challenges and their underlying causes.
-            To address them, we propose a novel regularization framework called <strong>VoxelSplat</strong>. This framework leverages recent developments in 3D Gaussian Splatting to enhance model performance in two key ways:
-            <br>
-            (<i>i</i>) <strong>Enhanced Semantics Supervision through 2D Projection</strong>: During training, our method decodes sparse semantic 3D Gaussians from 3D representations and projects them onto the 2D camera view. This provides additional supervision signals in the camera-visible space, allowing 2D labels to improve the learning of 3D semantics.
-            <br>
-            (<i>ii</i>) <strong>Scene Flow Learning</strong>: Our framework uses the predicted scene flow to model the motion of Gaussians, and is thus able to learn the scene flow of moving objects in a self-supervised manner using the labels of adjacent frames.
-            <br>
-            Our method can be seamlessly integrated into various existing occupancy models, enhancing performance without increasing inference time. Extensive experiments on benchmark datasets demonstrate the effectiveness of <strong>VoxelSplat</strong> in improving the accuracy of both semantic occupancy and scene flow estimation.
+        <p class="image-caption">
+            The overview of our framework: (1) Employing an occupancy model integrated with our flow decoder to predict occupancy and scene flow. 
+            (2) Sampling coordinates from occupied voxel centers using ground truth labels to extract features, semantic logits, and scene flow. 
+            Then, 3D semantic Gaussians are decoded. 
+            (3) Dividing the Gaussians into static and dynamic types, with dynamic ones updated by predicted scene flow. 
+            (4) Rendering static and dynamic Gaussians separately for 2D supervision.
         </p>
 
-        <h2>Method Overview</h2>
+        <div style="height: 20px;"></div>
+
+        <h2 style="text-align: center;">Improvement on nuScenes Dataset</h2>
         <div class="image-container">
-            <img src="images/method_overview.png" alt="Method Overview">
-            <p>Figure 1</p>
+            <img src="assets/performance.png" alt="nuScenes Performance">
+        </div>
+        <p class="image-caption">
+            The 3D occupancy prediction performance on the nuScenes validation set is evaluated. The RayIoU and mAVE results are obtained
+            using the annotations from OpenOcc, while the mIoU results are based on the Occ3D annotations. BEVDet-Occ-flow and
+            FB-Occ-flow represent the models with our scene flow decoder integrated into the original architectures.
+        </p>
+
+        <div style="height: 20px;"></div>
+
+        <h2 style="text-align: center;">Occupancy Prediction</h2>
+        <div class="grid-image-container">
+            <img src="assets/occ.png" alt="Occupancy Prediction Image">
+            <div class="image-labels">
+                <span>BEVDet-Occ</span>
+                <span>FB-Occ</span>
+                <span>Ours</span>
+                <span>Ground Truth</span>
+            </div>
+        </div>
+        <p class="image-caption">
+            The qualitative comparison of our occupancy prediction with other methods is presented. We highlight the regions where our
+            method shows clear superiority using red boxes, emphasizing the areas where the performance differences are most noticeable.
+        </p>
+        <div style="height: 20px;"></div>
+        <h2 style="text-align: center;">Scene Flow Prediction</h2>
+        <div class="flow-comparison-container">
+            <div class="row-label">Ours</div>
+            <div class="row-label">Ground Truth</div>
+            <img src="assets/flow.png" alt="Scene Flow Prediction Image" class="flow-image" />
+        </div>
+        <p class="image-caption">
+            We present a qualitative comparison of our scene flow prediction with the ground truth. We use a color scale to represent the
+            magnitude of the flow. Red arrows are employed to indicate both the direction and magnitude of the flow.
+        </p>
+
+        <div style="height: 20px;"></div>
+
+        <h2 style="text-align:center;">Effect of Rendering Supervision on Convergence</h2>
+        <div class="image-row">
+            <img src="assets/flow_loss_curve.png" alt="Flow Loss Curve" />
+            <img src="assets/occ_loss_curve.png" alt="Occupancy Loss Curve" />
+        </div>
+        <p style="max-width:900px; margin:auto; font-size:14px; line-height:1.6; text-align:justify;">
+            Our strategy of explicit modeling of the occupancy field with 3D Gaussians
+            and splat rendering supervision helps the original loss functions, including occupancy and flow loss, find a better convergence direction.
+        </p>
+
+        <div style="height: 20px;"></div>
+
+        <h2 style="text-align: center;">Visualization of Rendering Results</h2>
+        <div class="grid-image-container">
+            <img src="assets/render2.jpg" alt="Rendering Visualization" />
+        </div>
+        <p class="image-caption">
+            The visualization results of rendering semantics and depths on the validation dataset are presented. The first, second, and third rows are the input images, the rendered semantics, and the rendered depth maps, respectively.
+        </p>
+
+        <div class="bibtex-section" id="bibtex">
+            <h3>BibTeX</h3>
+            <div class="bibtex-container">
+@inproceedings{zhu2025voxelsplat,
+    author = {Zhu, Ziyue and Wang, Shenlong and Xie, Jin and Liu, Jiang-Jiang and Wang, Jingdong and Yang, Jian},
+    title = {VoxelSplat: Dynamic Gaussian Splatting as an Effective Loss for Occupancy and Flow Prediction},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    year = {2025},
+    month = {June},
+    note = {To appear},
+}
+            </div>
         </div>
 
-        <h2>Video Demo</h2>
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <p>Video 1</p>
-
-
-        <h2>Experimental Results</h2>
-        <div class="image-container">
-            <img src="images/results_comparison.png" alt="Results Comparison">
-            <p>Figure 2</p>
-        </div>
     </div>
 </body>
 </html>
+```
